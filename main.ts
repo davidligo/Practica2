@@ -119,6 +119,8 @@ function analidarCaracter(caracter: string): number {
     return 1;
 };
 
+
+
 function verificarEstado0Lexico(estado: number, valor2: string): number {
     var x = analidarCaracter(valor2);
     switch(estado){
