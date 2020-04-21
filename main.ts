@@ -114,9 +114,7 @@ function analidarCaracter(caracter: string): number {
             console.log("Caracter no valido en el lenguaje  "+caracter+"  ;");
             return -1;                      // error -1
     }
-
-
-    return 1;
+    return -1;
 };
 
 
@@ -194,18 +192,33 @@ function verificarEstado0Lexico(estado: number, valor2: string): number {
     return -1;
 }
 
+var listaEstadosSintactico = new Array();
+
+function analizarSintactico(): void {
+
+}
 
 function analizar(texto: string): void {
     var posibletoken: string = "";
     var estado: number = 0;
     var x: number = 0;
+    var linea: number = 1;
+    var columna: number = 1;
+    var estadoSintactico: number = 0;
 
     for(let i = 0; i<texto.length;i++){
-        
+        columna++;
         if(estado==0){
             estado = analidarCaracter(texto.charAt(i));
-            if(estado==3){
-                
+            if(estado==3||estado==-1){
+                var errore: error = new error("Lexico", linea, columna, "El carácter "+ texto.charAt(i) + " no pertenece al lenguaje");
+                listaErrores.push(errore);
+            }else if(estado==10||estado==11||estado==12||estado==13||estado==16||estado==17||estado==18||estado==19||estado==20||estado==21||estado==23||estado==24||estado==26||estado==27){
+                //se aceptan solos por lo que regresa al estado 0 del lexico
+                //estadoSintactico = 
+            }else if(estado==25){
+                linea++;
+                columna=1;
             }
             posibletoken = "";
             posibletoken = posibletoken + texto.charAt(i);
@@ -240,8 +253,6 @@ function analizar(texto: string): void {
     }
     
 }
-
-
 
 
 function hola(): void {
